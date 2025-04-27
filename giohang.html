@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Twenty-Five Fashion</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    header {
+      border-bottom: 1px solid #eee;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      padding: 10px;
+      font-size: 14px;
+      color: #777;
+      background-color: #ececec;
+    }
+
+    .breadcrumb a {
+      color: #777;
+      text-decoration: none;
+    }
+
+    .cart-section {
+      padding: 30px 20px;
+      text-align: center;
+      display: flex;
+    }
+
+    .cart-section div:first-child {
+      flex: 9;
+    }
+
+    .cart-section div:last-child {
+      flex: 3;
+    }
+
+    .cart-section h1 {
+      margin-bottom: 0px;
+      font-size: 24px;
+      text-transform: uppercase;
+    }
+
+    .empty-cart {
+      margin: 30px 0 0px;
+      color: #555;
+    }
+
+    .continue-shopping {
+      text-decoration: none;
+      color: #000;
+      padding: 0px 15px;
+      display: inline-block;
+      margin: 10px 0 5px;
+      transition: all 0.3s;
+    }
+
+    .continue-shopping:hover {
+      opacity: .8;
+    }
+
+    .order-info {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 30px 20px;
+      margin-left: auto;
+      margin-right: 0;
+      text-align: left;
+    }
+
+    .order-info h3 {
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    .order-row {
+      display: flex;
+      justify-content: space-between;
+      /* margin-bottom: 10px; */
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      background-color: #ff5722;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      margin-top: 15px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Features Section */
+    .features {
+      display: flex;
+      justify-content: space-between;
+      padding: 50px 0;
+      text-align: center;
+      background-color: #fafafa;
+    }
+
+    .feature {
+      flex: 1;
+      padding: 0 15px;
+    }
+
+    .feature-icon {
+      background-color: #2f2f2f;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      transition: 0.5s ease-out;
+    }
+
+    .feature-icon:hover {
+      transform: rotate(360deg);
+      border-radius: 10%;
+    }
+
+    .feature h3 {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .feature p {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #fff;
+      border-top: 1px solid #eee;
+      padding: 40px 0;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .footer-column {
+      flex: 1;
+      padding: 0 15px;
+    }
+
+    .footer-column h3 {
+      margin-bottom: 20px;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+
+    .footer-column p {
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-column ul li a {
+      color: #666;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-column ul li a:hover {
+      color: #ff5722;
+    }
+
+    .footer-column ul li a::before {
+      content: "→";
+      margin-right: 8px;
+    }
+
+    .social-links {
+      display: flex;
+      margin-top: 15px;
+    }
+
+    .social-links a {
+      display: block;
+      width: 36px;
+      height: 36px;
+      background-color: #eee;
+      border-radius: 50%;
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+    }
+
+    .social-links a:hover {
+      background-color: #ff5722;
+    }
+
+    .chat-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background-color: #007bff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      z-index: 100;
+    }
+
+    @media screen and (max-width: 768px) {
+      .cart-section {
+        flex-direction: column;
+      }
+
+      .cart-section div:first-child {}
+
+      .features {
+        flex-direction: column;
+        text-align: start;
+        align-items: start;
+        justify-content: start;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .feature {
+        min-width: 100% !important;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        padding: 10px 0;
+      }
+
+      .feature-icon {
+        margin: 0;
+        /* transform: scale(1); */
+        width: 50px;
+        height: 50px;
+      }
+
+      .feature div:last-child {
+        padding: 0 10px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+      }
+
+      .footer-content>div {
+        padding-top: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div style="padding: 50px;">Header</div>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="/" style="color: #000 ;">Trang chủ</a> / Giỏ hàng
+  </div>
+
+  <section class="cart-section">
+    <div>
+      <h1>GIỎ HÀNG</h1>
+
+      <div class="empty-cart">
+        <p>Không có sản phẩm nào trong giỏ hàng của bạn!</p>
+        <a href="/shop" class="continue-shopping">Tiếp tục mua hàng</a>
+      </div>
+    </div>
+    <div>
+      <a href="#" style="
+      text-align: end;
+      display: block;margin: 40px 0 5px; text-decoration: none; color: #000;">Tiếp tục mua hàng</a>
+      <div class="order-info">
+        <h3 style="margin-bottom: 5px;">Thông tin đơn hàng</h3>
+
+        <div class="order-row">
+          <span>Tạm tính:</span>
+          <span>0₫</span>
+        </div>
+
+        <div class="order-row">
+          <span><b>Tổng tiền:</b></span>
+          <span>0₫</span>
+        </div>
+
+        <p style="color: gray; padding: 10px 0 0;">Bạn có thể nhập mã giảm giá ở trang thanh toán</p>
+
+        <button class="checkout-btn">THANH TOÁN</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon"><a href="#" style="transform: scale(1.4); text-decoration: none;">🚚</a></div>
+        <div>
+          <h3>MIỄN PHÍ GIAO HÀNG</h3>
+          <p>Với hoá đơn từ 500.000đ</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><a href="#" style="transform: scale(1.4); text-decoration: none;">🔄</a></div>
+        <div>
+          <h3>7 NGÀY ĐỔI SẢN PHẨM</h3>
+          <p>Hàng sale vui lòng không đổi trả</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon"><a href="#" style="transform: scale(1.4); text-decoration: none;">📞</a></div>
+        <div>
+          <h3>MUA HÀNG (8H00-22H00, T2-CN)</h3>
+          <p>Mua hàng 0243 2161 777 - Hotline: 0904 001 199</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon"><a href="#" style="transform: scale(1.4); text-decoration: none;">🏪</a></div>
+        <div>
+          <h3>HỆ THỐNG CỬA HÀNG</h3>
+          <p>12 showrooms trên toàn hệ thống</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>TWENTY.FIVE FASHION</h3>
+        <p>Số ĐKKD: 01D-8005348, ngày cấp: 07/10/2017</p>
+        <p>Nơi cấp: Phòng tài chính - kế hoạch Quận Bắc Từ Liêm</p>
+        <p>Địa chỉ liên hệ: Số nhà 260, đường Trần Cung, phường Cổ Nhuế 1, quận Bắc Từ Liêm, thành phố Hà Nội.</p>
+        <p>Điện thoại: 0904 001 199</p>
+        <p>Email: twentyfivevn@gmail.com</p>
+      </div>
+
+      <div class="footer-column">
+        <h3>HỖ TRỢ</h3>
+        <ul>
+          <li><a href="#">Chính sách khách hàng thân thiết</a></li>
+          <li><a href="#">Chính sách vận chuyển và đổi sản phẩm</a></li>
+          <li><a href="#">Chính sách bảo mật thông tin khách hàng</a></li>
+          <li><a href="#">Hướng dẫn chọn size</a></li>
+          <li><a href="#">Hướng dẫn giặt là và bảo quản sản phẩm</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>THÔNG TIN LIÊN HỆ</h3>
+        <div class="social-links">
+          <a href="#" style="text-decoration: none; transform: scale(1.2);" title="Facebook">f</a>
+          <a href="#" style="text-decoration: none; transform: scale(1.2);" title="Instagram">in</a>
+          <a href="#" style="text-decoration: none; transform: scale(1.2);" title="Youtube">▶</a>
+          <a href="#" style="text-decoration: none; transform: scale(1.2);" title="Zalo">z</a>
+        </div>
+        <p style="margin-top: 20px;">Email</p>
+        <p>twentyfivevn@gmail.com</p>
+        <p style="margin-top: 20px; font-weight: bold;">ĐĂNG KÝ NHẬN THÔNG TIN ƯU ĐÃI VÀ XU HƯỚNG MỚI NHẤT</p>
+      </div>
+
+      <div class="footer-column">
+        <h3>FANPAGE</h3>
+      </div>
+    </div>
+  </footer>
+
+  <div class="chat-button">💬</div>
+</body>
+
+</html>
